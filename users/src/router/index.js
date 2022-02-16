@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
+import Edit from '../views/Edit.vue'
 import AdminAuth from '../router/AdminAuth'
 
 Vue.use(VueRouter)
@@ -20,16 +21,22 @@ const routes = [
     component: Register
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  }, 
+  {
     path: '/admin/users',
     name: 'Users',
     component: Users,
     beforeEnter: AdminAuth
-  },
+  }, 
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },  
+    path: '/admin/users/edit/:id',
+    name: 'UserEdit',
+    component: Edit,
+    beforeEnter: AdminAuth
+  },
   {
     path: '/about',
     name: 'About',
