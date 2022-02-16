@@ -4,7 +4,7 @@ var knex = require('knex')({
       host : '127.0.0.1',
       user : 'root',
       password : 'rska2022',
-      database : 'apiusers'
+      database : 'blog_data'
     }
   });
 

@@ -7,7 +7,7 @@ class User {
 
     async findAll() {
         try {
-            const result = await knex.select(["id","name", "email", "roles"]).table("users")
+            const result = await knex.select(["id","name", "email", "role"]).table("users")
             return result 
         } catch (erro) {
             console.log(erro)
@@ -17,7 +17,7 @@ class User {
 
     async findById(id) {
         try {
-            const result = await knex.select(["id","name", "email", "roles"]).where({ id: id }).table("users")
+            const result = await knex.select(["id","name", "email", "role"]).where({ id: id }).table("users")
             
             if (result.length > 0) {
                 return result[0]
@@ -33,7 +33,7 @@ class User {
 
     async findByEmail(email) {
         try {
-            const result = await knex.select(["id","name","password", "email", "roles"]).where({ email: email }).table("users")
+            const result = await knex.select(["id","name","password", "email", "role"]).where({ email: email }).table("users")
             
             if (result.length > 0) {
                 return result[0]
@@ -47,11 +47,11 @@ class User {
         }
     }
 
-    async new(nome, email, password) {
+    async new(name, email, password) {
         try {
             const salt = 10
             const hash = await bcrypt.hash(password, salt)
-            await knex.insert({ name, email, password: hash, roles: 0 }).table("users")
+            await knex.insert({ name, email, password: hash, role: 0 }).table("users")
         } catch(erro) {
             console.log(erro)
         }        
@@ -74,7 +74,7 @@ class User {
         
     }
 
-    async update(id, name, email, roles) {
+    async update(id, name, email, role) {
         const user = await this.findById(id)
 
         if (user !== undefined) {
@@ -94,8 +94,8 @@ class User {
                 }
             } 
 
-            if (roles !== undefined) {
-                editUser.roles = roles 
+            if (role !== undefined) {
+                editUser.role = role 
             }
 
             try {

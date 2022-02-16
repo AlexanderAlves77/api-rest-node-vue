@@ -49,8 +49,8 @@ class UserController {
     }
 
     async edit(req, res) {
-        const { id, name, email, roles } = req.body 
-        const result = await User.update(id,name,email,roles)
+        const { id, name, email, role } = req.body 
+        const result = await User.update(id,name,email,role)
 
         if (result !== undefined) {
             if (result.status) {
@@ -118,7 +118,7 @@ class UserController {
         if (user !== undefined) {
             const result = await bcrypt.compare(password, user.password)
             if (result) {
-                const token = jwt.sign({ email: user.email, roles: user.roles }, secret)
+                const token = jwt.sign({ email: user.email, role: user.role }, secret)
                 res.status(200)
                 res.json({token: token})
                 
