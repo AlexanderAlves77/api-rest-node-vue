@@ -26,7 +26,7 @@ class UserController {
     }
 
     async create(req, res) {
-        const {nome, email, password} = req.body
+        const {name, email, password} = req.body
 
         if (email === undefined || email === "" || email === " ") {
             res.status(400)
@@ -42,15 +42,15 @@ class UserController {
             return
         }
 
-        await User.new(nome, email, password)
+        await User.new(name, email, password)
 
         res.status(200)
         res.send("Cadastrado com sucesso.")
     }
 
     async edit(req, res) {
-        const { id, nome, email, roles } = req.body 
-        const result = await User.update(id,nome,email,roles)
+        const { id, name, email, roles } = req.body 
+        const result = await User.update(id,name,email,roles)
 
         if (result !== undefined) {
             if (result.status) {

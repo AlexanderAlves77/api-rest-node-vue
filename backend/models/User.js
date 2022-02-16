@@ -7,7 +7,7 @@ class User {
 
     async findAll() {
         try {
-            const result = await knex.select(["id","nome", "email", "roles"]).table("users")
+            const result = await knex.select(["id","name", "email", "roles"]).table("users")
             return result 
         } catch (erro) {
             console.log(erro)
@@ -17,7 +17,7 @@ class User {
 
     async findById(id) {
         try {
-            const result = await knex.select(["id","nome", "email", "roles"]).where({ id: id }).table("users")
+            const result = await knex.select(["id","name", "email", "roles"]).where({ id: id }).table("users")
             
             if (result.length > 0) {
                 return result[0]
@@ -33,7 +33,7 @@ class User {
 
     async findByEmail(email) {
         try {
-            const result = await knex.select(["id","nome","password", "email", "roles"]).where({ email: email }).table("users")
+            const result = await knex.select(["id","name","password", "email", "roles"]).where({ email: email }).table("users")
             
             if (result.length > 0) {
                 return result[0]
@@ -51,7 +51,7 @@ class User {
         try {
             const salt = 10
             const hash = await bcrypt.hash(password, salt)
-            await knex.insert({ nome, email, password: hash, roles: 0 }).table("users")
+            await knex.insert({ name, email, password: hash, roles: 0 }).table("users")
         } catch(erro) {
             console.log(erro)
         }        
@@ -74,14 +74,14 @@ class User {
         
     }
 
-    async update(id, nome, email, roles) {
+    async update(id, name, email, roles) {
         const user = await this.findById(id)
 
         if (user !== undefined) {
             let editUser = {}
 
             if (nome !== undefined) {
-                editUser.nome = nome 
+                editUser.name = name 
             }
 
             if (email !== undefined && email !== user.email) {
