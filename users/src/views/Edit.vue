@@ -55,13 +55,19 @@ export default {
     },
     methods: {
         update() {
+            const req = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            }
+
             axios.put("http://localhost:8686/user", {
+                id: this.id,
                 name: this.name,
-                email: this.email,
-                password: this.password
-            }).then(res => {
+                email: this.email                
+            }, req).then(res => {
                 console.log(res)
-                this.$router.push({ name: 'Home' })
+                this.$router.push({ name: 'Users' })
             }).catch(err => {
                 const msgErro = err.response.data.err
                 this.error = msgErro
