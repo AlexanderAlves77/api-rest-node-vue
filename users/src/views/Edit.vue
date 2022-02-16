@@ -2,19 +2,23 @@
     <div>
         <h2>Edição de Usuário!</h2>
         <hr>
+
         <div class="columns is-centered">            
-            <div class="column is-half">  
+            <div class="column is-half"> 
+
                 <div v-if="error !== undefined">                    
                     <div class="notification is-danger">
                         <p>{{error}}</p>
                     </div>
                 </div>
+
                 <p>Nome</p>              
                 <input type="text" placeholder="Nome do usuário" 
                     class="input" v-model="name">
                 <p>E-mail</p>              
                 <input type="email" placeholder="email@email.com" 
-                    class="input" v-model="email">                
+                    class="input" v-model="email">  
+
                 <hr>
                 <button class="button is-success" @click="update">Editar</button>
             </div>        
@@ -56,8 +60,8 @@ export default {
     methods: {
         update() {
             const req = {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token")
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 }
             }
 

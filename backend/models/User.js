@@ -78,11 +78,7 @@ class User {
         const user = await this.findById(id)
 
         if (user !== undefined) {
-            let editUser = {}
-
-            if (nome !== undefined) {
-                editUser.name = name 
-            }
+            let editUser = {}            
 
             if (email !== undefined && email !== user.email) {
                 const result = await this.findEmail(email)
@@ -93,6 +89,10 @@ class User {
                     return { status: false, err: "O usuário já está cadastrado."}
                 }
             } 
+
+            if (name !== undefined) {
+                editUser.name = name 
+            }
 
             if (role !== undefined) {
                 editUser.role = role 
